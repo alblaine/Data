@@ -1,10 +1,23 @@
+.container {
+   width: 92%;
+   
+}
 
+
+html, body {
+   padding: 0;
+   margin: 0;
+   height: 100%;
+   width: 100%; 
+   
+}
 th {
     font-weight: bold;
     text-align: left;
 }
 td, th {
-    padding: 5px;
+    padding-right: 5px;
+    margin-left: 0; 
     border-bottom: 1px solid silver;
     height: 20px;
 }
@@ -41,6 +54,16 @@ thead th {
     
 }
 
+
+.table {
+   padding-top: .5em; 
+   font-family: TimesNewRoman;
+   width: 90%; 
+   margin: 0 auto;
+   text-align: left; 
+   
+}
+
 .title {
    padding-bottom: .25em;
    border-bottom: solid 1px black; 
@@ -61,17 +84,12 @@ thead th {
 }
 
 
-#map {
-   position: relative !important;
-   width: 37.5 em; 
-   
-}
 
 p {
    padding-top: .25em; 
    font-family: TimesNewRoman, serif;
    color: black;
-   font-size: 13px; 
+   font-size: 100%; 
 }
 
 #modal {

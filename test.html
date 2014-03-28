@@ -2,8 +2,10 @@
 
 <html>
 <head>
-    <title>Page Title</title>
+    <title>China: Energy and Conflict</title>
+         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+   
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/highcharts-more.js"></script>
 
@@ -170,86 +172,11 @@
             date.push($year.attr("date"));
            
           
-         /*   Algeria.push(parseInt($year.find('Algeria').text()));
-            Angola.push(parseInt($year.find('Angola').text()));
-            Argentina.push(parseInt($year.find('Argentina').text()));
-            Australia.push(parseInt($year.find('Australia').text()));
-            Austria.push(parseInt($year.find('Austria').text()));
-            Bahrain.push(parseInt($year.find('Bahrain').text()));
-            Bangladesh.push(parseInt($year.find('Bangladesh').text()));
-            Belgium.push(parseInt($year.find('Belgium').text()));
-            Benin.push(parseInt($year.find('Benin').text()));
-            Bolivia.push(parseInt($year.find('Bolivia').text()));
-            Brazil.push(parseInt($year.find('Brazil').text()));
-            Brunei.push(parseInt($year.find('Brunei').text()));
-            Bulgaria.push(parseInt($year.find('Bulgaria').text()));
-            Cameroon.push(parseInt($year.find('Cameroon').text()));
-            Canada.push(parseInt($year.find('Canada').text()));
-            Chile.push(parseInt($year.find('Chile').text())); */
+        
             China.push(parseInt($year.find('China').text()));
-            /*Colombia.push(parseInt($year.find('Colombia').text())); 
-            Cuba.push(parseInt($year.find('Cuba').text()));
-            Denmark.push(parseInt($year.find('Denmark').text()));
-            Ecuador.push(parseInt($year.find('Ecuador').text()));
-            Egypt.push(parseInt($year.find('Egypt').text()));
-            Ethiopia.push(parseInt($year.find('Ethiopia').text()));
-            Finland.push(parseInt($year.find('Finland').text()));
-            France.push(parseInt($year.find('France').text()));
-            Gabon.push(parseInt($year.find('Gabon').text()));
-            Germany.push(parseInt($year.find('Germany').text()));
-            Ghana.push(parseInt($year.find('Ghana').text()));
-            Greece.push(parseInt($year.find('Greece').text()));
-            Guatemala.push(parseInt($year.find('Guatemala').text()));
-            Haiti.push(parseInt($year.find('Haiti').text()));
-            Honduras.push(parseInt($year.find('Honduras').text()));
-            HongKong.push(parseInt($year.find('Hong_x0020_Kong_x002C__x0020_China').text()));
-            Hungary.push(parseInt($year.find('Hungary').text()));
-            Iceland.push(parseInt($year.find('Iceland').text()));
-            India.push(parseInt($year.find('India').text()));
-            Indonesia.push(parseInt($year.find('Indonesia').text()));
-            Iraq.push(parseInt($year.find('Iraq').text()));
-            Ireland.push(parseInt($year.find('Ireland').text()));
-            Israel.push(parseInt($year.find('Israel').text()));
-            Italy.push(parseInt($year.find('Italy').text()));
-            Jamaica.push(parseInt($year.find('Jamaica').text()));
-            Japan.push(parseInt($year.find('Japan').text()));
-            SouthKorea.push(parseInt($year.find('South_x0020_Korea').text()));
-            Malaysia.push(parseInt($year.find('Malaysia').text()));
-            Mexico.push(parseInt($year.find('Mexico').text()));
-            Mongolia.push(parseInt($year.find('Mongolia').text()));
-            Morocco.push(parseInt($year.find('Morocco').text()));
-            Mozambique.push(parseInt($year.find('Mozambique').text()));
-            Nepal.push(parseInt($year.find('Nepal').text()));
-            Netherlands.push(parseInt($year.find('Netherlands').text()));
-            Nicaragua.push(parseInt($year.find('Nicaragua').text()));
-            Nigeria.push(parseInt($year.find('Nigeria').text()));
-            Norway.push(parseInt($year.find('Norway').text()));
-            Oman.push(parseInt($year.find('Oman').text()));
-            Pakistan.push(parseInt($year.find('Pakistan').text()));
-            Panama.push(parseInt($year.find('Panama').text()));
-            Paraguay.push(parseInt($year.find('Paraguay').text()));
-            Peru.push(parseInt($year.find('Peru').text()));
-            Philippines.push(parseInt($year.find('Philippines').text()));
-            Qatar.push(parseInt($year.find('Qatar').text()));
-            SaudiArabia.push(parseInt($year.find('Saudi_x0020_Arabia').text()));
-            Senegal.push(parseInt($year.find('Senegal').text()));;
-            Singapore.push(parseInt($year.find('Singapore').text()));
-            SouthAfrica.push(parseInt($year.find('South_x0020_Africa').text()));
-            Spain.push(parseInt($year.find('Spain').text()));
-            Sweden.push(parseInt($year.find('Sweden').text()));
-            Switzerland.push(parseInt($year.find('Switzerland').text()));
-            Syria.push(parseInt($year.find('Syria').text()));
-            Tanzania.push(parseInt($year.find('Tanzania').text()));
-            Thailand.push(parseInt($year.find('Thailand').text()));
-            Tunisia.push(parseInt($year.find('Tunisia').text()));
-            Turkey.push(parseInt($year.find('Turkey').text()));
-            UK.push(parseInt($year.find('United_x0020_Kingdom').text())); */
+            
             USA.push(parseInt($year.find('United_x0020_States').text()));
-           /* Venezuela.push(parseInt($year.find('Venezuela').text()));
-            Vietnam.push(parseInt($year.find('Vietnam').text()));
-            Zimbabwe.push(parseInt($year.find('Zimbabwe').text()));
-
-   */
+         
         });
         
                 
@@ -375,6 +302,7 @@ function writeChart(){
             tooltip: {valueSuffix: '$'
             },
             plotOptions: {
+                size: '90%', 
                 series: {
                 
                 pointPadding: 0.08,
@@ -428,7 +356,7 @@ function writeChart(){
             },
             plotOptions: {
                 pie: {
-                    size: '100%', 
+                    size: '90%', 
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
@@ -467,7 +395,7 @@ function writeChart(){
 
             plotOptions: {
                 pie: {
-                    size: '100%', 
+                    size: '90%', 
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
@@ -598,12 +526,12 @@ function writeChart(){
 
 <div class="container">
 
-
+<div class="headline"></div>
     
 <div class="row">
     
     <div class="col-md-12">
-        <div class="headline"></div>
+        
        <h2 class="title">China: Energy Supremacy and Conflict</h2>
         <p class="text" id="about">In 2010, China surpassed the United States as the world's biggest energy consumer, and on March 24, 2014, became the largest net importer of oil. A substantial number of Chinese energy investments are in conflict zones and countries in political crisis. Can China help to solve these problems?  <br><br><b><i>About the Data:</b> This data comes from the Heritage Foundation, U.S. Energy Information Association (EIA),
         the World Bank and Gapminder.org.</i></p>
@@ -615,13 +543,47 @@ function writeChart(){
         
       
         <div id ="chart"></div>
-    
-   <hr>
+          <hr>
+    </div> <!--close row-->
+    <div class="row">
+        
+        <div class="col-md-8">
         <div id="chart2"></div>
     
-   
+        </div>
     
-    
+    <div class="col-md-4">
+        <div class="headline"></div>
+        <h3 class="title">Notable Investments</h3>
+        <div class="table-responsive">
+        <table class="table">
+        
+        <tr>
+  <th>Country</th>
+  <th>Year</th>
+  <th>Cost</th>
+  <th>Benefit</th>
+  
+  </tr>
+<tr>
+  <td>Pakistan</td>
+  <td>2014</td>		
+  <td>$20 billion</td>
+  <td>Develop Pakistan's energy infrastructure
+  for control of coal plants</td>
+  </tr>
+<tr>
+  <td>Dem. Rep. of Congo</td>
+  <td>2007</td>
+  <td>$6 billion</td>		
+  <td>Build 145 health clinics, 2 universities and 2400 miles of roads.</td>
+</tr>
+
+        
+        
+        </table>
+        </div>
+    </div>
     
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -655,24 +617,23 @@ function writeChart(){
 
 </script>
     
-
 </div> <!-- close row--> 
 <hr>
 <div class="row">
 <div class="col-md-4 col-sm-12">
-        <h4 class="subtitle">Russia and Crimea</h4>
+        <h4 class="title">Russia and Crimea</h4>
         <p class="text">China consumes both Russian and Ukranian energy, but signed a treaty in 2013 to buy $350 billion of Russian crude. China's desperation for oil and Western sanctions on Russia mean that China is in a delicate place regarding Crimea. While publically supporting Ukranian sovereignty, the opportunity to enjoy a larger share of Russian oil is likely to temper its position.  
         <div id="chart4"></div>
         
     </div>
 <div class="col-md-4 col-sm-12">
-    <h4 class="subtitle">Sudan and South Sudan</h4>
+    <h4 class="title">Sudan and South Sudan</h4>
         <p class="text">China invested $21 billion in to Sudan's economy before the breakup of the country and creation of South Sudan in 2011. Now, China is in the middle of a conflict over resources between the countries and rebel groups, who are kidnapping oil workers, sending some back home in coffins. China evacuated 300 workers in January due to regional violence. <div id="chart4"></div>
     <div id="chart3"></div>
 </div>
 <div class="col-md-4 col-sm-12">
     
-    <h4 class="subtitle">Democratic Republic of Congo</h4>
+    <h4 class="title">Democratic Republic of Congo</h4>
         <p class="text">In a country where after decades of civil war, almost 45,000 people still die every month, the world's largest hydropower project is afoot. Two Chinese firms are bidding for the $12 billion dollar Inga Dam Project, which would make the DRC the third largest generator of hydropower in the world and potentially help a suffering population.</p>
             <div id="chart5"></div>
    
