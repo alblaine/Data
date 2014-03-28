@@ -13,114 +13,20 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="styles.css" rel="stylesheet">
         <link href="fonts.css" rel="stylesheet" type="text/css" />
+        <link href="media/css/demo_table.css" rel="stylesheet"> <!--datatables style sheet-->
 
     <script type="text/javascript">
             year = [];
             date = [];
             name=[];
-            aaData= []; 
+            aaData= new Array; 
+            aoColumns = new Array; 
             gdp = [];
            countryArray = []; 
-            Albania = [];
-            Algeria = [];
-            Angola = [];
-            Argentina= [];
-            Australia= [];
-            Austria= [];
-            Bahrain= [];
-            Bangladesh= [];
-            Belgium= [];
-            Benin= [];
-            Bolivia= [];
-            Brazil= [];
-            Brunei= [];
-            Bulgaria= [];
-            Cameroon= [];
-            Canada= [];
-            Chile= [];
+            
             China= [];
-            Colombia= [];
-            Cuba= [];
-            Cyprus= [];
-            Czech = [];
-            Denmark= [];
-            Dominican = [];
-            Ecuador= [];
-            Salvador= [];
-            Egypt= [];
-            Ethiopia= [];
-            Finland= [];
-            France= [];
-            Gabon= [];
-            Germany= [];
-            Ghana= [];
-            Greece= [];
-            Guatemala= [];
-            Haiti= [];
-            Honduras= [];
-            HongKong= [];
-            Hungary= [];
-            Iceland= [];
-            India= [];
-            Indonesia= [];
-            Iran= [];
-            Iraq= [];
-            Ireland= [];
-            Israel= [];
-            Italy = [];
-            Jamaica = [];
-            Japan = [];
-            Jordan= [];
-            SouthKorea= [];
-            Kuwait= [];
-            Lebanon= [];
-            Luxembourg= [];
-            Malaysia= [];
-            Mexico= [];
-            Mongolia= [];
-            Morocco= [];
-            Mozambique= [];
-            Myanmar= [];
-            Nepal= [];
-            Netherlands= [];
-            NewZealand= [];
-            Nicaragua= [];
-            Nigeria= [];
-            Norway= [];
-            Oman= [];
-            Pakistan= [];
-            Panama= [];
-            Paraguay= [];
-            Peru = [];
-            Philippines = [];
-            Poland= [];
-            Portugal= [];
-            Qatar= [];
-            Romania= [];
-            SaudiArabia= [];
-            Senegal= [];
-            Singapore= [];
-            SouthAfrica = [];
-            Spain= [];
-            Sudan= [];
-            Sweden= [];
-            Switzerland= [];
-            Syria= [];
-            Tanzania= [];
-            Thailand= [];
-            Togo= [];
-            Trinidad = [];
-            Tunisia= [];
-            Turkey= [];
-            UAE = [];
-            UK = [];
+            
             USA= [];
-            Uruguay= [];
-            Venezuela= [];
-            Vietnam= [];
-            Yemen= [];
-            Zambia= [];
-            Zimbabwe= [];
             
             var conflictCountry= [];
             var totalInvestment = [];
@@ -157,8 +63,28 @@
             
          });
           
-                    
-
+             $.ajax ({
+                type: "GET",
+                url: "stats/china-global-investment.xml",
+                dataType: "xml",
+                success: function (xml) {
+                
+                $(xml).find("investment").each(function(index) {
+                //Builds table data
+                 investmentArray = new Array;
+                 investmentArray.push($(this).find("Country").text(), $(this).find("Year").text(), $(this).find("Quantity_x0020_in_x0020_Millions").text(), $(this).find("Subsector").text()); 
+                 aaData.push(investmentArray); 
+                
+                });
+                     aoColumns = new Array;
+                     aoColumns = [ { "sTitle" : "Country"}, {"sTitle" : "Year"}, {"sTitle": "Quantity_x0020_in_x0020_Millions"}, {"sTitle": "Subsector"}];
+ 	        
+                    console.log(aaData);
+                    console.log(aoColumns);         
+		    buildTable();
+				}
+             });                                 
+            
             $.ajax({
 		type: "GET",
 		url: "total-use-90-10.xml",
@@ -184,7 +110,22 @@
                 }
     });
               
-              
+function buildTable() {
+    
+      $("#data_table").html('<table cellpadding = "0" border="0" class="display" id="example"></table>')
+  
+   
+   $("#data_table").dataTable ( {
+    
+    "aaData" : aaData, 
+     "aoColumns" :aoColumns
+  
+    
+    
+})
+
+}
+
 function writeChart(){
  
         $('#chart').highcharts
@@ -511,8 +452,7 @@ function writeChart(){
       }
         
 
-});
-    
+});    
   
 
 
@@ -645,12 +585,14 @@ function writeChart(){
 </div> 
 <div class="row">
     <div class="col-md-4 col-sm-12">
-    
+          <table id="data_table"></table>
+	  
+        </div>
     
     </div><!--close row-->
   
 </div> <!--close container -->
-
+    <script src="media/js/jquery.dataTables.min.js"></script> <!--datatables plugin --> 
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
