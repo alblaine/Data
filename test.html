@@ -72,12 +72,12 @@
                 $(xml).find("investment").each(function(index) {
                 //Builds table data
                  investmentArray = new Array;
-                 investmentArray.push($(this).find("Country").text(), $(this).find("Year").text(), $(this).find("Quantity_x0020_in_x0020_Millions").text(), $(this).find("Subsector").text()); 
+                 investmentArray.push($(this).find("Country").text(), $(this).find("Year").text(), $(this).find("Quantity_x0020_in_x0020_Millions").text(), $(this).find("Investor").text(), $(this).find("Subsector").text()); 
                  aaData.push(investmentArray); 
                 
                 });
                      aoColumns = new Array;
-                     aoColumns = [ { "sTitle" : "Country"}, {"sTitle" : "Year"}, {"sTitle": "Quantity_x0020_in_x0020_Millions"}, {"sTitle": "Subsector"}];
+                     aoColumns = [ { "sTitle" : "Country"}, {"sTitle" : "Year"}, {"sTitle": "Investment in Millions"}, {"sTitle": "Investor"}, {"sTitle" : "Subsector"}];
  	        
                     console.log(aaData);
                     console.log(aoColumns);         
@@ -313,7 +313,7 @@ function writeChart(){
                 type: 'pie',
                 name: 'Sudan',
                 data: [['Oil',  15],['Hydro', 68], ['Non-Specified', 17]],
-                colors: ['#000000', '#700000',  '#996666']
+                colors: ['#707070', '#700000',  '#996666']
             }]
             
              
@@ -352,7 +352,7 @@ function writeChart(){
                 type: 'pie',
                 name: 'Russia',
                 data: [['Oil',  44],['Gas', 10], ['Non-Specified', 47]],
-                colors: ['#000000', '#EED5D2',  '#996666']
+                colors: ['#707070', '#EED5D2',  '#996666']
             }],
                     
             
@@ -436,7 +436,7 @@ function writeChart(){
                 type: 'pie',
                 name: 'Syria (DRC)',
                 data: [['Oil',  61], ['Non-Specified', 39]],
-                colors: ['#000000', '#996666']
+                colors: ['#707070', '#E0E0E0']
             }],
                     
             
@@ -465,13 +465,11 @@ function writeChart(){
 
 
 <div class="container">
-
-<div class="headline"></div>
     
 <div class="row">
     
     <div class="col-md-12">
-        
+       <div class="headline"></div> 
        <h2 class="title">China: Energy Supremacy and Conflict</h2>
         <p class="text" id="about">In 2010, China surpassed the United States as the world's biggest energy consumer, and on March 24, 2014, became the largest net importer of oil. A substantial number of Chinese energy investments are in conflict zones and countries in political crisis. Can China help to solve these problems?  <br><br><b><i>About the Data:</b> This data comes from the Heritage Foundation, U.S. Energy Information Association (EIA),
         the World Bank and Gapminder.org.</i></p>
@@ -562,7 +560,7 @@ function writeChart(){
 <div class="row">
 <div class="col-md-4 col-sm-12">
         <h4 class="title">Russia and Crimea</h4>
-        <p class="text">China consumes both Russian and Ukranian energy, but signed a treaty in 2013 to buy $350 billion of Russian crude. China's desperation for oil and Western sanctions on Russia mean that China is in a delicate place regarding Crimea. While publically supporting Ukranian sovereignty, the opportunity to enjoy a larger share of Russian oil is likely to temper its position.  
+        <p class="text">China consumes both Russian and Ukranian energy, but signed a treaty in 2013 to buy $350 billion of Russian crude. China's need for oil and Western sanctions on Russia mean that China is in a delicate place regarding Crimea. While publically supporting Ukranian sovereignty, the opportunity to enjoy a larger share of Russian oil is likely to temper its position.  
         <div id="chart4"></div>
         
     </div>
@@ -578,14 +576,16 @@ function writeChart(){
             <div id="chart5"></div>
    
     
+
 </div>
-</div>
+
 <div class="row">
-    
-</div> 
-<div class="row">
-    <div class="col-md-4 col-sm-12">
-          <table id="data_table"></table>
+    <div class="col-md-12 col-sm-12">
+        <div class="headline"></div>
+        <h3 class="title">Search the Data</h3>
+        <p class="text">Data source: The Heritage Foundation</p>
+        <br>
+          <table id="data_table"></table><br><br>
 	  
         </div>
     
