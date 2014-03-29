@@ -3,19 +3,21 @@
 <html>
 <head>
     <title>China: Energy and Conflict</title>
-         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <meta name="viewport" content="width=device-width">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
    
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    
 
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="styles.css" rel="stylesheet">
         <link href="fonts.css" rel="stylesheet" type="text/css" />
         <link href="media/css/demo_table.css" rel="stylesheet"> <!--datatables style sheet-->
-
+<script src="js/jquery.scrollUp.min.js"></script>
     <script type="text/javascript">
+        
             year = [];
             date = [];
             name=[];
@@ -36,6 +38,30 @@
             var non = []; 
             
     $(document).ready(function() {
+        
+      $(function () {
+    $.scrollUp({
+        scrollName: 'scrollUp', // Element ID
+        scrollDistance: 300, // Distance from top/bottom before showing element (px)
+        scrollFrom: 'top', // 'top' or 'bottom'
+        scrollSpeed: 300, // Speed back to top (ms)
+        easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+        animation: 'fade', // Fade, slide, none
+        animationInSpeed: 200, // Animation in speed (ms)
+        animationOutSpeed: 200, // Animation out speed (ms)
+        scrollTrigger: false, // Set a custom triggering element. Can be an HTML string or jQuery object
+        scrollTarget: false, // Set a custom target element for scrolling to. Can be element or number
+        scrollText: 'Scroll to top', // Text for element, can contain HTML
+        scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+        scrollImg: false, // Set true to use image
+        activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+        zIndex: 2147483647 // Z-Index for the overlay
+    });
+});
+      
+      
+      
+      
       
          $.ajax({
             type: "GET",
@@ -469,13 +495,13 @@ function writeChart(){
 <div class="row">
     
     <div class="col-md-12">
-       <div class="headline"></div> 
+        <br>
        <h2 class="title">China: Energy Supremacy and Conflict</h2>
-        <p class="text" id="about">In 2010, China surpassed the United States as the world's biggest energy consumer, and on March 24, 2014, became the largest net importer of oil. A substantial number of Chinese energy investments are in conflict zones and countries in political crisis. Can China help to solve these problems?  <br><br><b><i>About the Data:</b> This data comes from the Heritage Foundation, U.S. Energy Information Association (EIA),
+        <p class="text" id="about">In 2010, China surpassed the United States as the world's biggest energy consumer, and on March 24, 2014, became the largest net importer of oil. A substantial number of Chinese energy investments are in conflict zones and countries in political crisis. Can China help to solve their problems? <br><br><b><i>About the Data:</b> This data comes from the Heritage Foundation, U.S. Energy Information Association (EIA),
         the World Bank and Gapminder.org.</i></p>
        
         
-        <div class="btn-group" id="button2"><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-collapse-up"></span>&nbsp;Toggle the text</button></div>
+        <div class="btn-group" id="button2"><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-collapse-up"></span>&nbsp;Toggle all text</button></div>
       
       <hr><p class="text"><b>Click on a bar below to see the data in detail.</b></p>
         
@@ -524,6 +550,7 @@ function writeChart(){
     </div>
     
 <!-- Modal -->
+<div id="scrollUp"></div>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -545,6 +572,7 @@ function writeChart(){
 
  
 <script>
+
 
   
   $( "#button2" ).click(function() {
@@ -582,8 +610,8 @@ function writeChart(){
 <div class="row">
     <div class="col-md-12 col-sm-12">
         <div class="headline"></div>
-        <h3 class="title">Search the Data</h3>
-        <p class="text">Data source: The Heritage Foundation</p>
+        <h4 class="title">Search the Data: China's foreign investments and contracts in energy, 2005-2013</h4>
+        <p class="text">Source: The Heritage Foundation</p>
         <br>
           <table id="data_table"></table><br><br>
 	  
