@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>China: Energy and Conflict</title>
+         <meta name="viewport" content="width=device-width">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+   
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    
+
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <link href="fonts.css" rel="stylesheet" type="text/css" />
+        <link href="media/css/demo_table.css" rel="stylesheet"> <!--datatables style sheet-->
+<script src="js/jquery.scrollUp.min.js"></script>
+    <script type="text/javascript">
+        
+            year = [];
+            date = [];
+            name=[];
+            aaData= new Array; 
+            aoColumns = new Array; 
+            gdp = [];
+           countryArray = []; 
+            
+            China= [];
+            
+            USA= [];
+            
+            var conflictCountry= [];
+            var totalInvestment = [];
+            var oil = [];
+            var gas = [];
+            var hydro = [];
+            var non = []; 
+            
+    $(document).ready(function() {
+        
+      $(function () {
+    $.scrollUp({
+        scrollName: 'scrollUp', // Element ID
+        scrollDistance: 300, // Distance from top/bottom before showing element (px)
+        scrollFrom: 'top', // 'top' or 'bottom'
+        scrollSpeed: 300, // Speed back to top (ms)
+        easingType: 'linear', // Scroll to top easing (see http://easings.net/)
+        animation: 'fade', // Fade, slide, none
+        animationInSpeed: 200, // Animation in speed (ms)
+        animationOutSpeed: 200, // Animation out speed (ms)
+        scrollTrigger: false, // Set a custom triggering element. Can be an HTML string or jQuery object
+        scrollTarget: false, // Set a custom target element for scrolling to. Can be element or number
+        scrollText: 'Scroll to top', // Text for element, can contain HTML
+        scrollTitle: false, // Set a custom <a> title if required. Defaults to scrollText
+        scrollImg: false, // Set true to use image
+        activeOverlay: false, // Set CSS color to display scrollUp active point, e.g '#00FFFF'
+        zIndex: 2147483647 // Z-Index for the overlay
+    });
+});
+      
+      
+      
+      
+      
+         $.ajax({
+            type: "GET",
+            url: "china-investment-conflict.xml",
+            datatype: "xml",
+            success: function(xml) {
+                
+                    $(xml).find("node").each(function(index) {
+                    
+                            var $node = $(this);
+                            console.log($node); 
+                            conflictCountry.push($node.find("Name").text());
+                            totalInvestment.push(parseInt($node.find("Total").text()));
+                            oil.push(parseInt($node.find("Oil").text()));
+                            gas.push(parseInt($node.find("Gas").text()));
+                            hydro.push(parseInt($node.find("Hydro").text()));
+                            non.push(parseInt($node.find("Non").text()));
+                    
+                    console.log(conflictCountry); 
+                
+                    });
+                    
+             
+                } 
+            
+         });
+          
+             $.ajax ({
+                type: "GET",
+                url: "stats/china-global-investment.xml",
+                dataType: "xml",
+                success: function (xml) {
+                
+                $(xml).find("investment").each(function(index) {
+                //Builds table data
+                 investmentArray = new Array;
+                 investmentArray.push($(this).find("Country").text(), $(this).find("Year").text(), $(this).find("Quantity_x0020_in_x0020_Millions").text(), $(this).find("Investor").text(), $(this).find("Subsector").text()); 
+                 aaData.push(investmentArray); 
+                
+                });
+                     aoColumns = new Array;
+                     aoColumns = [ { "sTitle" : "Country"}, {"sTitle" : "Year"}, {"sTitle": "Investment in Millions"}, {"sTitle": "Investor"}, {"sTitle" : "Subsector"}];
+ 	        
+                    console.log(aaData);
+                    console.log(aoColumns);         
+		    buildTable();
+				}
+             });                                 
+            
+            $.ajax({
+		type: "GET",
+		url: "total-use-90-10.xml",
+		dataType: "xml",
+		success: function(xml) {
+
+                  
+        $(xml).find("year").each(function(index){
+            var $year = $(this);
+
+            date.push($year.attr("date"));
+           
+          
+        
+            China.push(parseInt($year.find('China').text()));
+            
+            USA.push(parseInt($year.find('United_x0020_States').text()));
+         
+        });
+        
+                
+		writeChart();
+                }
+    });
+              
+function buildTable() {
+    
+      $("#data_table").html('<table cellpadding = "0" border="0" class="display" id="example"></table>')
+  
+   
+   $("#data_table").dataTable ( {
+    
+    "aaData" : aaData, 
+     "aoColumns" :aoColumns
+  
+    
+    
+})
+
+}
+
+function writeChart(){
+ 
+        $('#chart').highcharts
+        var chart = new Highcharts.Chart({
+        chart: {
+
+            layout: 'vertical',
+            renderTo: 'chart',
+            type: 'column',
+            
+        },
+        title: {
+            text: 'Total Energy Use (1990-2010)',
+            style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '18px'}
+        },
+        
+        subtitle: {
+            text: 'In Thousands of Metric Tons (kt)',
+            style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '14px'}
+        }, 
+        
+        xAxis: {
+            labels: {
+                    enabled: false
+                },
+            categories: date,
+            title: {
+                    text: null,
+                    labels: {
+                        text: null
+                        } 
+                }
+        },
+        yAxis: {
+            title: {
+                text: 'Energy (kilotons of oil equivalent)',
+                 style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '10px'}
+            }
+        },
+         plotOptions: {
+            
+            series: {
+                cursor: 'pointer',
+                groupPadding: 0.001,
+                pointPadding: 0.08,
+                 
+                point: {
+                    events: {
+                        click: function() {
+                            
+                             $(".modal-body").empty();
+                             $(".modal-body").append('<b>Year: </b>'+ this.category +' <br><b>Country: </b>' + this.series.name + '<br><b>Energy used</b> (in billions of metric tons)</b>: '+ this.y/1000000000 + '<br><b>Conversion:</b> One metric ton equals 2,205 pounds');
+                             $("#myModal").modal();
+                        }
+                    }
+                }
+            }
+        }, 
+        series: [{
+        
+        series: 'g',
+       
+            allowPointSelect: true, 
+            name: 'China',
+            data: China,
+            color: '#700000'
+        
+        },{
+             series: 'z',
+             type: 'line', 
+            allowPointSelect: true, 
+            name: 'United States',
+            data: USA,
+            color: '#000000'
+        }] 
+        
+      
+     });
+        
+        
+        $('#chart2').highcharts({
+            
+            chart: {
+                type: 'bar',
+                renderTo: 'chart2'
+            },
+            
+            title: {
+                
+                text: "China's Energy Investment in Conflict Regions, 2005-2013",
+                style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '18px'}
+            },
+            
+            subtitle: {
+                text: 'Total Investments and Contracts, in Millions of U.S. Dollars',
+                style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '14px'
+                }
+            }, 
+            xAxis: {
+                categories: conflictCountry,
+                
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Millions of $US Dollars',
+                    style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '10px'}
+                },
+             labels: {overflow: 'justify'}   
+            },
+            
+            tooltip: {valueSuffix: '$'
+            },
+            plotOptions: {
+                size: '90%', 
+                series: {
+                
+                pointPadding: 0.08,
+                groupPadding: 0.001
+                } ,
+                    bar: {
+                    
+                    dataLabels: {
+                        enabled: true
+                    
+            
+                    } ,
+                    
+                marker: {}, 
+                
+                states: {
+                    hover: {
+                        color: 'gray'
+                    }
+                }
+                
+                }
+            },
+            series: [{
+                
+                    name: 'Total',
+                    data: totalInvestment,
+                    color: '#996666'
+    
+            }]
+                
+                
+        });
+            
+             $('#chart3').highcharts({
+                  
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+                
+            },
+            title: {    
+                text: 'Sudan, By Sector',
+                style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '14px'}
+            },
+            
+            
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    size: '90%', 
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Sudan',
+                data: [['Oil',  15],['Hydro', 68], ['Non-Specified', 17]],
+                colors: ['#707070', '#700000',  '#996666']
+            }]
+            
+             
+        });
+        
+             $('#chart4').highcharts({
+                  
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: "Russia, By Sector",
+                style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '14px'}
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+
+            plotOptions: {
+                pie: {
+                    size: '90%', 
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        color: '#000000',
+                        connectorColor: '#000000'
+                        
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Russia',
+                data: [['Oil',  44],['Gas', 10], ['Non-Specified', 47]],
+                colors: ['#707070', '#EED5D2',  '#996666']
+            }],
+                    
+            
+             
+        });
+    
+
+            
+                   $('#chart5').highcharts({
+                  
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: "Dem. Rep. of Congo, By Sector",
+                style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '14px'}
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+
+            plotOptions: {
+                pie: {
+                    size: '100%', 
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        color: '#000000',
+                        connectorColor: '#000000'
+                        
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Democratic Republic of Congo (DRC)',
+                data: [['Hydro',  100]],
+                colors: ['#700000']
+            }],
+                    
+            
+             
+        });
+    
+  
+            
+             $('#chart6').highcharts({
+                  
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: "By Sector",
+                style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '14px'}
+            },
+            tooltip: {
+        	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+
+            plotOptions: {
+                pie: {
+                    size: '100%', 
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        showInLegend: true
+                        
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Syria (DRC)',
+                data: [['Oil',  61], ['Non-Specified', 39]],
+                colors: ['#707070', '#E0E0E0']
+            }],
+                    
+            
+             
+        });
+            
+            
+            
+            
+
+            
+            
+      }
+        
+
+});    
+  
+
+
+    </script>
+</head>
+
+
+
+<body>
+
+
+<div class="container">
+    
+<div class="row">
+    
+    <div class="col-md-12">
+        <br>
+       <h2 class="title">China: Energy Supremacy and Conflict</h2>
+        <p class="text" id="about">In 2010, China surpassed the United States as the world's biggest energy consumer, and on March 24, 2014, became the largest net importer of oil. A substantial number of Chinese energy investments are in conflict zones and countries in political crisis. Can China help to solve their problems? <br><br><b><i>About the Data:</b> This data comes from the Heritage Foundation, U.S. Energy Information Association (EIA),
+        the World Bank and Gapminder.org.</i></p>
+       
+        
+        <div class="btn-group" id="button2"><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-collapse-up"></span>&nbsp;Toggle all text</button></div>
+      
+      <hr><p class="text"><b>Click on a bar below to see the data in detail.</b></p>
+        
+      
+        <div id ="chart"></div>
+          <hr>
+    </div> <!--close row-->
+    <div class="row">
+        
+        <div class="col-md-8">
+        <div id="chart2"></div>
+    
+        </div>
+    
+    <div class="col-md-4">
+        <div class="headline"></div>
+        <h3 class="title">Notable Investments</h3>
+        <div class="table-responsive">
+        <table class="table">
+        
+        <tr>
+  <th>Country</th>
+  <th>Year</th>
+  <th>Cost</th>
+  <th>Benefit</th>
+  
+  </tr>
+<tr>
+  <td>Pakistan</td>
+  <td>2014</td>		
+  <td>$20 billion</td>
+  <td>Develop Pakistan's energy infrastructure
+  for control of coal plants</td>
+  </tr>
+<tr>
+  <td>Dem. Rep. of Congo</td>
+  <td>2007</td>
+  <td>$6 billion</td>		
+  <td>Build 145 health clinics, 2 universities and 2400 miles of roads.</td>
+</tr>
+
+        
+        
+        </table>
+        </div>
+    </div>
+    
+<!-- Modal -->
+<div id="scrollUp"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 id="myModalLabel" class="title">Data breakdown</h4>
+      </div>
+      <div class="modal-body" id="modal">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    </div>
+
+ 
+<script>
+
+
+  
+  $( "#button2" ).click(function() {
+  $( ".text" ).toggle( "slow" )
+
+});
+
+
+</script>
+    
+</div> <!-- close row--> 
+<hr>
+<div class="row">
+<div class="col-md-4 col-sm-12">
+        <h4 class="title">Russia and Crimea</h4>
+        <p class="text">China consumes both Russian and Ukranian energy, but signed a treaty in 2013 to buy $350 billion of Russian crude. China's need for oil and Western sanctions on Russia mean that China is in a delicate place regarding Crimea. While publically supporting Ukranian sovereignty, the opportunity to enjoy a larger share of Russian oil is likely to temper its position.  
+        <div id="chart4"></div>
+        
+    </div>
+<div class="col-md-4 col-sm-12">
+    <h4 class="title">Sudan and South Sudan</h4>
+        <p class="text">China invested $21 billion in to Sudan's economy before the breakup of the country and creation of South Sudan in 2011. Now, China is in the middle of a conflict over resources between the countries and rebel groups, who are kidnapping oil workers, sending some back home in coffins. China evacuated 300 workers in January due to regional violence. <div id="chart4"></div>
+    <div id="chart3"></div>
+</div>
+<div class="col-md-4 col-sm-12">
+    
+    <h4 class="title">Democratic Republic of Congo</h4>
+        <p class="text">In a country where after decades of civil war, almost 45,000 people still die every month, the world's largest hydropower project is afoot. Two Chinese firms are bidding for the $12 billion dollar Inga Dam Project, which would make the DRC the third largest generator of hydropower in the world and potentially help a suffering population.</p>
+            <div id="chart5"></div>
+   
+    
+
+</div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="headline"></div>
+        <h4 class="title">Search the Data: China's foreign investments and contracts in energy, 2005-2013</h4>
+        <p class="text">Source: The Heritage Foundation</p>
+        <br>
+          <table id="data_table"></table><br><br>
+	  
+        </div>
+    
+    </div><!--close row-->
+  
+</div> <!--close container -->
+    <script src="media/js/jquery.dataTables.min.js"></script> <!--datatables plugin --> 
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
