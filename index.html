@@ -39,6 +39,8 @@
             
     $(document).ready(function() {
         
+    // add scroll up button
+    
       $(function () {
     $.scrollUp({
         scrollName: 'scrollUp', // Element ID
@@ -61,7 +63,7 @@
       
       
       
-      
+      //get the data for the pie charts 
       
          $.ajax({
             type: "GET",
@@ -89,6 +91,9 @@
             
          });
           
+          
+          //get the data for the data table at the bottom of the page
+          
              $.ajax ({
                 type: "GET",
                 url: "stats/china-global-investment.xml",
@@ -110,6 +115,9 @@
 		    buildTable();
 				}
              });                                 
+            
+            
+            //get the data for the bar/line chart
             
             $.ajax({
 		type: "GET",
@@ -137,6 +145,9 @@
                 }
     });
               
+              
+            //build data table
+            
 function buildTable() {
     
       $("#data_table").html('<table cellpadding = "0" border="0" class="display" id="example"></table>')
