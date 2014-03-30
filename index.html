@@ -592,7 +592,6 @@ function writeChart(){
  
 <script>
 
-
   
   $( "#button2" ).click(function() {
   $( ".text" ).toggle( "slow" )
@@ -607,26 +606,33 @@ function writeChart(){
         <div class="col-md-12 col-sm-12">
          <div class="headline"></div>
                 <h3 class="title">2014 Spotlight</h3>
-                <p><i>China has some difficult energy investing decisions to make in 2014. Will the benefits outweigh the risks?</i></p>
+                <p class="text2"><i>China has some difficult energy investing decisions to make in 2014. Will the benefits outweigh the risks?</i></p>
+        <div class="btn-group" id="button3"><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-collapse-up"></span>&nbsp;Toggle the text</button></div>
+   
+   <script>$("#button3").click(function() {
+     $( ".text2" ).toggle( "slow" )
+     });
+     </script>   
+        
         </div>
     </div>
 <div class="row">
 <div class="col-md-4 col-sm-12">
 
         <h4 class="title">Russia and Crimea</h4>
-        <p class="text">China signed a treaty in 2013 to buy $350 billion of Russian crude. China's need for oil and Western sanctions on Russia mean that China is in a delicate place regarding Crimea. While publically supporting Ukranian sovereignty, the opportunity to enjoy a larger share of Russian oil is likely to temper its position.  
+        <p class="text2">China signed a treaty in 2013 to buy $350 billion of Russian crude. China's need for oil and Western sanctions on Russia mean that China is in a delicate place regarding Crimea. While publically supporting Ukranian sovereignty, the opportunity to enjoy a larger share of Russian oil is likely to temper its position.  
         <div id="chart4"></div>
         
     </div>
 <div class="col-md-4 col-sm-12">
     <h4 class="title">Sudan and South Sudan</h4>
-        <p class="text">China invested $21 billion in to Sudan's economy before the breakup of the country and creation of South Sudan in 2011. Now, China is in the middle of a conflict over resources between the countries and rebel groups, who are kidnapping oil workers, sending some back home in coffins. China evacuated 300 workers in January due to regional violence. <div id="chart4"></div>
+        <p class="text2">China invested $21 billion in to Sudan's economy before the breakup of the country and creation of South Sudan in 2011. Now, China is in the middle of a conflict over resources between the countries and rebel groups, who are kidnapping oil workers, sending some back home in coffins. China evacuated 300 workers in January due to regional violence. <div id="chart4"></div>
     <div id="chart3"></div>
 </div>
 <div class="col-md-4 col-sm-12">
     
     <h4 class="title">Democratic Republic of Congo</h4>
-        <p class="text">In a country embroiled in civil war for decades, where almost 45,000 people still die every month, the world's largest hydropower project is afoot. Two Chinese firms are bidding for the $12 billion dollar Inga Dam Project, which would make the DRC the third largest generator of hydropower in the world and potentially help a suffering population.</p>
+        <p class="text2">In a country embroiled in civil war for decades, where almost 45,000 people still die every month, the world's largest hydropower project is afoot. Two Chinese firms are bidding for the $12 billion dollar Inga Dam Project, which would make the DRC the third largest generator of hydropower in the world and potentially help a suffering population.</p>
             <div id="chart5"></div>
    
     
@@ -637,7 +643,7 @@ function writeChart(){
     <div class="col-md-12 col-sm-12"><br>
         <div class="headline"></div>
         <h3 class="title">Search the Data: China's foreign investments and contracts in energy, 2005-2013</h3>
-        <p class="text"><i>See China's energy investments worldwide since 2005.</i></p><p class="text">Source: The Heritage Foundation</p>
+        <p><i>See China's energy investments worldwide since 2005.</i></p><p class="text">Source: The Heritage Foundation</p>
         <br>
           <table id="data_table"></table><br><br>
 	  
