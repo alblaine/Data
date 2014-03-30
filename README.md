@@ -1,4 +1,4 @@
 Responsive data app
 ====
-March 30, 2014
+Submitted: March 30, 2014
 
