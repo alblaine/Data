@@ -113,7 +113,7 @@
             
             $.ajax({
 		type: "GET",
-		url: "total-use-90-10.xml",
+		url: "total-use-90-10-chus.xml",
 		dataType: "xml",
 		success: function(xml) {
 
@@ -126,6 +126,7 @@
           
         
             China.push(parseInt($year.find('China').text()));
+            
             
             USA.push(parseInt($year.find('United_x0020_States').text()));
          
@@ -169,7 +170,7 @@ function writeChart(){
         },
         
         subtitle: {
-            text: 'In Thousands of Metric Tons (kt)',
+            text: 'In Millions of Metric Tons (kt)',
             style: {fontFamily: 'TimesNewRoman', color: '#000000', fontSize: '14px'}
         }, 
         
@@ -181,10 +182,12 @@ function writeChart(){
             title: {
                     text: null,
                     labels: {
-                        text: null
+                        text: true
                         } 
                 }
         },
+        tooltip: {valueSuffix: ' $US'
+            },
         yAxis: {
             title: {
                 text: 'Energy (kilotons of oil equivalent)',
@@ -195,15 +198,15 @@ function writeChart(){
             
             series: {
                 cursor: 'pointer',
-                groupPadding: 0.001,
-                pointPadding: 0.08,
-                 
+                groupPadding: 0.01,
+                pointPadding: 0.15,
+                
                 point: {
                     events: {
                         click: function() {
                             
                              $(".modal-body").empty();
-                             $(".modal-body").append('<b>Year: </b>'+ this.category +' <br><b>Country: </b>' + this.series.name + '<br><b>Energy used</b> (in billions of metric tons)</b>: '+ this.y/1000000000 + '<br><b>Conversion:</b> One metric ton equals 2,205 pounds');
+                             $(".modal-body").append('<b>Year: </b>'+ this.category +' <br><b>Country: </b>' + this.series.name + '<br><b>Energy used</b> (in millions of metric tons)</b>: '+ this.y +' <br><b>Conversion:</b> One metric ton equals 2,205 pounds');
                              $("#myModal").modal();
                         }
                     }
@@ -225,7 +228,7 @@ function writeChart(){
             allowPointSelect: true, 
             name: 'United States',
             data: USA,
-            color: '#000000'
+            color: '#707070'
         }] 
         
       
@@ -266,7 +269,7 @@ function writeChart(){
              labels: {overflow: 'justify'}   
             },
             
-            tooltip: {valueSuffix: '$'
+            tooltip: {valueSuffix: ' $US'
             },
             plotOptions: {
                 size: '90%', 
@@ -497,13 +500,14 @@ function writeChart(){
     <div class="col-md-12">
   <div class="headline"></div>
        <h2 class="title">China: Energy Supremacy and Conflict</h2>
-        <p class="text" id="about">In 2010, China surpassed the United States as the world's biggest energy consumer, and on March 24, 2014, became the largest net importer of oil. A substantial number of Chinese energy investments are in conflict zones and countries in political crisis. Can China help to solve their problems? <br><br><b><i>About the Data:</b> This data comes from the Heritage Foundation, U.S. Energy Information Association (EIA),
-        the World Bank and Gapminder.org.</i></p>
+        <p class="text" id="about"><i>In 2010, China surpassed the United States as the world's biggest energy consumer, and on March 24, 2014, became the largest net importer of oil. A substantial number of Chinese energy investments are in conflict
+        zones and countries in political crisis. Can China help to solve their problems? <br><br><b></i>About the Data:</b> This data comes from the Heritage Foundation, U.S. Energy Information Association (EIA),
+        the World Bank and Gapminder.org.</p>
        
         
-        <div class="btn-group" id="button2"><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-collapse-up"></span>&nbsp;Toggle all text</button></div>
+        <div class="btn-group" id="button2"><button type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-collapse-up"></span>&nbsp;Toggle the text</button></div>
       
-      <hr><p class="text"><b>Click on a bar below to see the data in detail.</b></p>
+      <hr><p class="text"><b>Click on a bar or point on this graph to see the data in detail.</b></p>
         
       
         <div id ="chart"></div>
@@ -533,7 +537,7 @@ function writeChart(){
   <td>Nigeria</td>
   <td>2013</td>		
   <td>$1.1 billion</td>
-  <td>Develop Nigerian airports, roads, and rail lines and energy infrastructure</td>
+  <td>Currently developing Nigerian airports, roads, rail lines and energy infrastructure</td>
   </tr>
 <tr>
   <td>Dem. Rep. of Congo</td>
@@ -592,6 +596,7 @@ function writeChart(){
         <div class="col-md-12 col-sm-12">
          <div class="headline"></div>
                 <h3 class="title">2014 Spotlight</h3>
+                <p><i>China has some difficult energy investing decisions to make in 2014.</i></p>
         </div>
     </div>
 <div class="row">
@@ -621,7 +626,7 @@ function writeChart(){
     <div class="col-md-12 col-sm-12"><br>
         <div class="headline"></div>
         <h3 class="title">Search the Data: China's foreign investments and contracts in energy, 2005-2013</h3>
-        <p class="text">Source: The Heritage Foundation</p>
+        <p class="text"><i>See China's energy investments worldwide since 2005.</i></p><p class="text">Source: The Heritage Foundation</p>
         <br>
           <table id="data_table"></table><br><br>
 	  
